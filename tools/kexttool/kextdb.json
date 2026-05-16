@@ -1,0 +1,814 @@
+{
+  "_meta": {
+    "version": "1.1.0",
+    "updated": "2026-05-16",
+    "author": "jzadl",
+    "description": "Hackintosh kext + macOS compatibility database for tools.jzadl.xyz/kext-checker. Tested on T480 (Tahoe), T440s. Kexts only — no Quirks, no ACPI, no config.plist.",
+    "cdn": "cdn.jzadl.xyz/tools/kexttool/kextdb.json",
+    "sources": [
+      "https://dortania.github.io/OpenCore-Install-Guide/",
+      "https://github.com/acidanthera",
+      "https://github.com/OpenIntelWireless",
+      "https://github.com/VoodooI2C",
+      "Personal Hackintosh experience — T480 Tahoe, T440s (jzadl)"
+    ]
+  },
+
+  "macos_versions": [
+    {
+      "id": "tahoe",
+      "name": "Tahoe",
+      "version": "26",
+      "kernel": "25",
+      "released": "2025-09-15",
+      "status": "latest",
+      "notes": "Last macOS to support Intel. Audio requires OCLP-Mod with lowered SIP. AirportItlwm Ventura build works on Tahoe. macOS 27 will be Apple Silicon only.",
+      "oclp_mod_required": true,
+      "oclp_mod_note": "OCLP-Mod required for audio. Lowered SIP required (csr-active-config: 03000000).",
+      "broken_natively": ["Audio (AppleHDA)"],
+      "workarounds": {
+        "audio": "OCLP-Mod with lowered SIP. Do NOT use VoodooHDA.",
+        "intel_wifi": "Use AirportItlwm Ventura build — confirmed working on Tahoe.",
+        "broadcom_wifi": "Use AppleBCMWLANCompanion or OCLP-Mod"
+      }
+    },
+    {
+      "id": "sequoia",
+      "name": "Sequoia",
+      "version": "15",
+      "kernel": "24",
+      "released": "2024-09-16",
+      "status": "stable_recommended",
+      "notes": "Recommended stable option. OCLP 2.4.1 fully supported. Broadcom Wi-Fi needs OCLP root patch. Audio works natively with AppleALC.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "sonoma",
+      "name": "Sonoma",
+      "version": "14",
+      "kernel": "23",
+      "released": "2023-09-26",
+      "status": "supported",
+      "notes": "Broadcom Wi-Fi needs OCLP root patch. AppleALC works fine.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "ventura",
+      "name": "Ventura",
+      "version": "13",
+      "kernel": "22",
+      "released": "2022-10-24",
+      "status": "supported",
+      "notes": "Natively supports Coffee Lake (8th gen) and newer iGPUs. Older gens need OCLP root patches for GPU acceleration.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "monterey",
+      "name": "Monterey",
+      "version": "12",
+      "kernel": "21",
+      "released": "2021-10-25",
+      "status": "supported",
+      "notes": "Supports Haswell (4th gen) and newer natively. BlueToolFixup required for Intel Bluetooth.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "bigsur",
+      "name": "Big Sur",
+      "version": "11",
+      "kernel": "20",
+      "released": "2020-11-12",
+      "status": "legacy",
+      "notes": "Supports Haswell (4th gen) and newer natively.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "catalina",
+      "name": "Catalina",
+      "version": "10.15",
+      "kernel": "19",
+      "released": "2019-10-07",
+      "status": "legacy",
+      "notes": "Ivy Bridge (3rd gen) and newer supported natively.",
+      "oclp_mod_required": false
+    },
+    {
+      "id": "mojave",
+      "name": "Mojave",
+      "version": "10.14",
+      "kernel": "18",
+      "released": "2018-09-24",
+      "status": "eol",
+      "notes": "Last macOS with NVIDIA Web Driver support. Sandy Bridge supported.",
+      "oclp_mod_required": false,
+      "nvidia_webdriver": true
+    },
+    {
+      "id": "highsierra",
+      "name": "High Sierra",
+      "version": "10.13",
+      "kernel": "17",
+      "released": "2017-09-25",
+      "status": "eol",
+      "notes": "Last macOS with NVIDIA Maxwell/Pascal Web Driver support.",
+      "oclp_mod_required": false,
+      "nvidia_webdriver": true
+    }
+  ],
+
+  "intel_generations": [
+    {
+      "gen": 14,
+      "name": "Raptor Lake Refresh",
+      "codename": "Raptor Lake-R",
+      "example_cpus": ["i9-14900K", "i7-14700K", "i5-14600K"],
+      "igpu": "Intel UHD 770",
+      "igpu_macos_support": "none",
+      "igpu_notes": "No iGPU acceleration on any macOS. Must use a supported dGPU.",
+      "min_macos": "ventura",
+      "max_macos": "tahoe",
+      "special_kexts": ["CpuTopologyRebuild"],
+      "notes": "Hybrid P+E core CPU. Requires CpuTopologyRebuild kext."
+    },
+    {
+      "gen": 13,
+      "name": "Raptor Lake",
+      "codename": "Raptor Lake",
+      "example_cpus": ["i9-13900K", "i7-13700K", "i5-13600K"],
+      "igpu": "Intel UHD 770",
+      "igpu_macos_support": "none",
+      "igpu_notes": "No iGPU acceleration on any macOS. Must use a supported dGPU.",
+      "min_macos": "ventura",
+      "max_macos": "tahoe",
+      "special_kexts": ["CpuTopologyRebuild"],
+      "notes": "Hybrid P+E core CPU. Requires CpuTopologyRebuild kext."
+    },
+    {
+      "gen": 12,
+      "name": "Alder Lake",
+      "codename": "Alder Lake",
+      "example_cpus": ["i9-12900K", "i7-12700K", "i5-12600K"],
+      "igpu": "Intel UHD 770",
+      "igpu_macos_support": "none",
+      "igpu_notes": "No iGPU acceleration on any macOS. Must use a supported dGPU.",
+      "min_macos": "ventura",
+      "max_macos": "tahoe",
+      "special_kexts": ["CpuTopologyRebuild"],
+      "notes": "First Intel hybrid P+E core. iGPU unsupported in macOS. CpuTopologyRebuild required."
+    },
+    {
+      "gen": 11,
+      "name": "Rocket Lake / Tiger Lake",
+      "codename": "Rocket Lake (desktop) / Tiger Lake (mobile)",
+      "example_cpus": ["i9-11900K", "i7-11700K", "i5-11600K", "i7-1165G7", "i5-1135G7"],
+      "igpu": "Intel UHD 750 / Intel Iris Xe",
+      "igpu_macos_support": "none",
+      "igpu_notes": "ZERO iGPU acceleration on ANY macOS. Apple never added Iris Xe / UHD 750 support. No workaround exists. VESA only.",
+      "min_macos": "bigsur",
+      "max_macos": "tahoe",
+      "special_kexts": [],
+      "notes": "Critical: iGPU completely unsupported. Must use a supported AMD dGPU."
+    },
+    {
+      "gen": 10,
+      "name": "Comet Lake / Ice Lake",
+      "codename": "Comet Lake (desktop/mobile) / Ice Lake (mobile)",
+      "example_cpus": ["i9-10900K", "i7-10700K", "i5-10600K", "i7-1065G7"],
+      "igpu": "Intel UHD 630 / Intel Iris Plus",
+      "igpu_macos_support": "full",
+      "igpu_notes": "Full acceleration on all supported macOS versions.",
+      "min_macos": "catalina",
+      "max_macos": "tahoe",
+      "special_kexts": [],
+      "notes": "Solid macOS support. UHD 630 very well supported."
+    },
+    {
+      "gen": 9,
+      "name": "Coffee Lake Refresh",
+      "codename": "Coffee Lake-R",
+      "example_cpus": ["i9-9900K", "i7-9700K", "i5-9600K"],
+      "igpu": "Intel UHD 630",
+      "igpu_macos_support": "full",
+      "igpu_notes": "Full acceleration on all supported macOS versions.",
+      "min_macos": "mojave",
+      "max_macos": "tahoe",
+      "special_kexts": [],
+      "notes": "Excellent macOS compatibility. Very popular Hackintosh platform."
+    },
+    {
+      "gen": 8,
+      "name": "Coffee Lake",
+      "codename": "Coffee Lake",
+      "example_cpus": ["i7-8700K", "i5-8600K", "i3-8100", "i7-8550U", "i5-8250U"],
+      "igpu": "Intel UHD 630 / Intel UHD 620",
+      "igpu_macos_support": "full",
+      "igpu_notes": "Full acceleration. Minimum gen for native Ventura iGPU support.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "special_kexts": [],
+      "notes": "Minimum gen natively supported by Ventura+. ThinkPad T480, X280 use UHD 620."
+    },
+    {
+      "gen": 7,
+      "name": "Kaby Lake",
+      "codename": "Kaby Lake",
+      "example_cpus": ["i7-7700K", "i5-7600K", "i7-7500U", "i5-7200U"],
+      "igpu": "Intel HD 630 / Intel HD 620",
+      "igpu_macos_support": "oclp_required_ventura_plus",
+      "igpu_notes": "Full native acceleration up to Monterey. Ventura+ requires OCLP root patch.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "ventura",
+      "special_kexts": [],
+      "notes": "Great platform. ThinkPad T470, X1 Carbon G5."
+    },
+    {
+      "gen": 6,
+      "name": "Skylake",
+      "codename": "Skylake",
+      "example_cpus": ["i7-6700K", "i5-6600K", "i7-6500U", "i5-6200U"],
+      "igpu": "Intel HD 530 / Intel HD 520",
+      "igpu_macos_support": "oclp_required_ventura_plus",
+      "igpu_notes": "Full native acceleration up to Monterey. Ventura+ requires OCLP root patch.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "ventura",
+      "special_kexts": [],
+      "notes": "ThinkPad T460, T460s, X260 very well supported."
+    },
+    {
+      "gen": 5,
+      "name": "Broadwell",
+      "codename": "Broadwell",
+      "example_cpus": ["i7-5775C", "i5-5675C", "i7-5500U"],
+      "igpu": "Intel HD 6000 / Intel Iris Pro 6200",
+      "igpu_macos_support": "oclp_required_ventura_plus",
+      "igpu_notes": "Full native acceleration up to Monterey. Ventura+ requires OCLP root patch.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "ventura",
+      "special_kexts": [],
+      "notes": "Mostly laptops. ThinkPad T450s, X250."
+    },
+    {
+      "gen": 4,
+      "name": "Haswell",
+      "codename": "Haswell",
+      "example_cpus": ["i7-4770K", "i5-4690K", "i7-4750HQ", "i7-4600U"],
+      "igpu": "Intel HD 4600 / Intel HD 4400 / Intel Iris 5100",
+      "igpu_macos_support": "oclp_required_ventura_plus",
+      "igpu_notes": "Full native acceleration up to Monterey. Ventura+ requires OCLP root patch.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "ventura",
+      "special_kexts": [],
+      "notes": "Minimum gen for native Big Sur/Monterey. ThinkPad T440s, T440p, T450 iconic Hackintosh laptops."
+    },
+    {
+      "gen": 3,
+      "name": "Ivy Bridge",
+      "codename": "Ivy Bridge",
+      "example_cpus": ["i7-3770K", "i5-3570K", "i7-3720QM"],
+      "igpu": "Intel HD 4000",
+      "igpu_macos_support": "oclp_required_bigsur_plus",
+      "igpu_notes": "Full native acceleration up to Catalina. Big Sur+ requires OCLP root patch.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "bigsur",
+      "special_kexts": [],
+      "notes": "ThinkPad T430, X230 very popular. HD 4000 still works via OCLP."
+    },
+    {
+      "gen": 2,
+      "name": "Sandy Bridge",
+      "codename": "Sandy Bridge",
+      "example_cpus": ["i7-2600K", "i5-2500K", "i7-2630QM"],
+      "igpu": "Intel HD 3000",
+      "igpu_macos_support": "oclp_required_bigsur_plus",
+      "igpu_notes": "Native up to Catalina. Big Sur+ requires OCLP root patch. HD 3000 support limited.",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "oclp_required_from": "bigsur",
+      "special_kexts": [],
+      "notes": "Aging but functional."
+    }
+  ],
+
+  "amd_generations": [
+    {
+      "id": "zen4",
+      "name": "Zen 4",
+      "example_cpus": ["Ryzen 9 7950X", "Ryzen 7 7700X", "Ryzen 5 7600X", "Ryzen 9 7940HS"],
+      "igpu": "AMD Radeon 780M (RDNA 3)",
+      "igpu_macos_support": "nootedred",
+      "min_macos": "ventura",
+      "max_macos": "tahoe",
+      "requires_amd_patches": true,
+      "notes": "Requires AMD kernel patches. NootedRed for APU iGPU."
+    },
+    {
+      "id": "zen3",
+      "name": "Zen 3",
+      "example_cpus": ["Ryzen 9 5950X", "Ryzen 7 5800X", "Ryzen 5 5600X", "Ryzen 7 5700G"],
+      "igpu": "AMD Radeon Vega (APU only)",
+      "igpu_macos_support": "nootedred",
+      "min_macos": "bigsur",
+      "max_macos": "tahoe",
+      "requires_amd_patches": true,
+      "notes": "Very popular. Zen 3 AMD patches mature and stable."
+    },
+    {
+      "id": "zen2",
+      "name": "Zen 2",
+      "example_cpus": ["Ryzen 9 3900X", "Ryzen 7 3700X", "Ryzen 5 3600"],
+      "igpu": "AMD Radeon Vega (APU only)",
+      "igpu_macos_support": "nootedred",
+      "min_macos": "catalina",
+      "max_macos": "tahoe",
+      "requires_amd_patches": true,
+      "notes": "Well tested AMD platform."
+    },
+    {
+      "id": "zen1",
+      "name": "Zen / Zen+",
+      "example_cpus": ["Ryzen 7 1700X", "Ryzen 5 1600", "Ryzen 7 2700X"],
+      "igpu": null,
+      "igpu_macos_support": "none",
+      "min_macos": "highsierra",
+      "max_macos": "tahoe",
+      "requires_amd_patches": true,
+      "notes": "Original Zen. Still works with AMD patches."
+    }
+  ],
+
+  "gpu_families": [
+    {
+      "id": "intel_uhd_630",
+      "vendor": "Intel",
+      "name": "Intel UHD 630 / 620 / 617",
+      "intel_gens": [8, 9, 10],
+      "macos_support": "full",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"]
+    },
+    {
+      "id": "intel_hd_630",
+      "vendor": "Intel",
+      "name": "Intel HD 630 / 620 / 615 (Kaby Lake)",
+      "intel_gens": [7],
+      "macos_support": "oclp_ventura_plus",
+      "native_macos": ["highsierra","mojave","catalina","bigsur","monterey"],
+      "oclp_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"]
+    },
+    {
+      "id": "intel_hd_530",
+      "vendor": "Intel",
+      "name": "Intel HD 530 / 520 / 515 (Skylake)",
+      "intel_gens": [6],
+      "macos_support": "oclp_ventura_plus",
+      "native_macos": ["highsierra","mojave","catalina","bigsur","monterey"],
+      "oclp_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"]
+    },
+    {
+      "id": "intel_hd_4000",
+      "vendor": "Intel",
+      "name": "Intel HD 4000 / 4600 / 5000 / 5100 (Ivy Bridge / Haswell / Broadwell)",
+      "intel_gens": [3, 4, 5],
+      "macos_support": "oclp_bigsur_plus",
+      "native_macos": ["highsierra","mojave","catalina"],
+      "oclp_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"]
+    },
+    {
+      "id": "intel_iris_xe",
+      "vendor": "Intel",
+      "name": "Intel Iris Xe / UHD 750 (11th gen and newer)",
+      "intel_gens": [11, 12, 13, 14],
+      "macos_support": "none",
+      "supported_macos": [],
+      "kext_ids": [],
+      "warning": "No macOS acceleration whatsoever. No workaround. Must use dGPU."
+    },
+    {
+      "id": "amd_rdna2",
+      "vendor": "AMD",
+      "name": "AMD RX 6000 series (RDNA 2)",
+      "macos_support": "full",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen","nootrx"]
+    },
+    {
+      "id": "amd_rdna1",
+      "vendor": "AMD",
+      "name": "AMD RX 5000 series (RDNA 1)",
+      "macos_support": "full",
+      "supported_macos": ["catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen","nootrx"]
+    },
+    {
+      "id": "amd_polaris",
+      "vendor": "AMD",
+      "name": "AMD RX 400 / 500 series (Polaris)",
+      "macos_support": "full",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"],
+      "notes": "One of the best Hackintosh GPU families. Plug and play."
+    },
+    {
+      "id": "amd_vega",
+      "vendor": "AMD",
+      "name": "AMD RX Vega 56 / 64 / Vega VII",
+      "macos_support": "full",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["whatevergreen"]
+    },
+    {
+      "id": "amd_igpu",
+      "vendor": "AMD",
+      "name": "AMD Radeon iGPU (APU — Vega / RDNA)",
+      "macos_support": "nootedred",
+      "supported_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "kext_ids": ["nootedred"],
+      "notes": "NootedRed replaces WhateverGreen for these. Do not use both."
+    },
+    {
+      "id": "nvidia_kepler",
+      "vendor": "NVIDIA",
+      "name": "NVIDIA GTX 600 / 700 series (Kepler)",
+      "macos_support": "partial",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey"],
+      "kext_ids": ["whatevergreen"],
+      "notes": "Last NVIDIA with native support. Dead on Ventura+."
+    },
+    {
+      "id": "nvidia_maxwell_pascal",
+      "vendor": "NVIDIA",
+      "name": "NVIDIA GTX 900 / 1000 series (Maxwell / Pascal)",
+      "macos_support": "webdriver_only",
+      "supported_macos": ["highsierra","mojave"],
+      "kext_ids": ["whatevergreen"],
+      "notes": "Web Drivers required. High Sierra and Mojave only.",
+      "webdriver_required": true
+    },
+    {
+      "id": "nvidia_turing_plus",
+      "vendor": "NVIDIA",
+      "name": "NVIDIA RTX 2000 / 3000 / 4000 / 5000 series",
+      "macos_support": "none",
+      "supported_macos": [],
+      "kext_ids": [],
+      "warning": "Completely unsupported. No drivers exist or will ever exist."
+    }
+  ],
+
+  "kexts": [
+    {
+      "id": "lilu",
+      "name": "Lilu",
+      "category": "Essential",
+      "priority": "essential",
+      "description": "Core kernel patching framework. Required by almost every other kext. Must be loaded first.",
+      "github": "https://github.com/acidanthera/Lilu",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "always_required": true,
+      "load_order": 1
+    },
+    {
+      "id": "virtualsmc",
+      "name": "VirtualSMC",
+      "category": "Essential",
+      "priority": "essential",
+      "description": "Emulates Apple SMC chip. Absolutely required for any Hackintosh to boot.",
+      "github": "https://github.com/acidanthera/VirtualSMC",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "always_required": true,
+      "depends_on": ["lilu"],
+      "load_order": 2
+    },
+    {
+      "id": "whatevergreen",
+      "name": "WhateverGreen",
+      "category": "GPU",
+      "priority": "essential",
+      "description": "GPU patching for Intel and AMD GPUs. Fixes display output, HDMI audio, DRM, and framebuffer issues.",
+      "github": "https://github.com/acidanthera/WhateverGreen",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_gpu_vendor": ["Intel","AMD"],
+      "exclude_gpu_ids": ["intel_iris_xe","amd_igpu","nvidia_turing_plus"]
+    },
+    {
+      "id": "nootedred",
+      "name": "NootedRed",
+      "category": "GPU",
+      "priority": "essential",
+      "description": "Enables GPU acceleration for AMD APU iGPUs (Vega/RDNA). Replaces WhateverGreen for these — do not use both.",
+      "github": "https://github.com/NootInc/NootedRed",
+      "supported_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_gpu_ids": ["amd_igpu"]
+    },
+    {
+      "id": "nootrx",
+      "name": "NootRX",
+      "category": "GPU",
+      "priority": "recommended",
+      "description": "Enhances support for AMD RX 5000/6000 dGPUs on top of WhateverGreen.",
+      "github": "https://github.com/NootInc/NootRX",
+      "supported_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_gpu_ids": ["amd_rdna1","amd_rdna2"]
+    },
+    {
+      "id": "cputopologyrebuild",
+      "name": "CpuTopologyRebuild",
+      "category": "CPU",
+      "priority": "essential",
+      "description": "Fixes P+E core scheduling on Intel Alder Lake (12th gen) and newer hybrid CPUs.",
+      "github": "https://github.com/b00t0x/CpuTopologyRebuild",
+      "supported_macos": ["ventura","sonoma","sequoia","tahoe"],
+      "match_intel_gen_min": 12
+    },
+    {
+      "id": "applealc",
+      "name": "AppleALC",
+      "category": "Audio",
+      "priority": "essential",
+      "description": "Native audio via layout-id injection. Works with most Realtek, Conexant, IDT, Cirrus codecs. Not supported on Tahoe.",
+      "github": "https://github.com/acidanthera/AppleALC",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia"],
+      "not_supported_macos": ["tahoe"],
+      "tahoe_note": "Broken on Tahoe. Use OCLP-Mod with lowered SIP instead.",
+      "depends_on": ["lilu"],
+      "match_has_audio": true
+    },
+    {
+      "id": "oclp_mod_audio",
+      "name": "OCLP-Mod (Audio fix)",
+      "category": "Audio",
+      "priority": "essential",
+      "description": "Restores AppleHDA audio on macOS Tahoe. Requires lowered SIP (csr-active-config: 03000000). The correct Tahoe audio solution — do NOT use VoodooHDA.",
+      "github": "https://github.com/lzhoang2801/OpCore-Simplify",
+      "supported_macos": ["tahoe"],
+      "match_has_audio": true,
+      "match_macos": ["tahoe"],
+      "sip_required": true
+    },
+    {
+      "id": "airportitlwm",
+      "name": "AirportItlwm (Ventura build)",
+      "category": "Wi-Fi",
+      "priority": "essential",
+      "description": "Native-like Intel Wi-Fi with AirDrop and Handoff. Use the Ventura build on Tahoe — confirmed working on T480.",
+      "github": "https://github.com/OpenIntelWireless/itlwm",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "tahoe_note": "Use Ventura build on Tahoe. Confirmed working.",
+      "match_wifi_vendor": "Intel"
+    },
+    {
+      "id": "intelbluetoothfirmware",
+      "name": "IntelBluetoothFirmware",
+      "category": "Bluetooth",
+      "priority": "essential",
+      "description": "Firmware loader for Intel Bluetooth. Works out of the box on most configurations.",
+      "github": "https://github.com/OpenIntelWireless/IntelBluetoothFirmware",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_wifi_vendor": "Intel"
+    },
+    {
+      "id": "bluetoolfixup",
+      "name": "BlueToolFixup",
+      "category": "Bluetooth",
+      "priority": "essential",
+      "description": "Required for Intel Bluetooth on macOS Monterey and newer.",
+      "github": "https://github.com/acidanthera/BrcmPatchRAM",
+      "supported_macos": ["monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_wifi_vendor": "Intel",
+      "match_macos_min": "monterey"
+    },
+    {
+      "id": "airportbrcmfixup",
+      "name": "AirportBrcmFixup",
+      "category": "Wi-Fi",
+      "priority": "essential",
+      "description": "Enables Broadcom Wi-Fi cards (BCM94360, BCM943602, BCM94352, etc.). Needs OCLP root patch on Sonoma+.",
+      "github": "https://github.com/acidanthera/AirportBrcmFixup",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_wifi_vendor": "Broadcom"
+    },
+    {
+      "id": "brcmpatchram",
+      "name": "BrcmPatchRAM3 + BrcmFirmwareData",
+      "category": "Bluetooth",
+      "priority": "essential",
+      "description": "Bluetooth firmware loader for Broadcom adapters. Include both BrcmPatchRAM3 and BrcmFirmwareData.",
+      "github": "https://github.com/acidanthera/BrcmPatchRAM",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_wifi_vendor": "Broadcom"
+    },
+    {
+      "id": "realtekrtl8111",
+      "name": "RealtekRTL8111",
+      "category": "Ethernet",
+      "priority": "essential",
+      "description": "Driver for Realtek RTL8111/RTL8168 Gigabit Ethernet. Most common chip on desktop motherboards.",
+      "github": "https://github.com/Mieze/RTL8111_driver_for_OS_X",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_ethernet_regex": "RTL8111|RTL8168|Realtek"
+    },
+    {
+      "id": "lucyrtl8125",
+      "name": "LucyRTL8125Ethernet",
+      "category": "Ethernet",
+      "priority": "essential",
+      "description": "Driver for Realtek RTL8125 2.5GbE. Common on Z490, B550, X570 and newer boards.",
+      "github": "https://github.com/Mieze/LucyRTL8125Ethernet",
+      "supported_macos": ["catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_ethernet_regex": "RTL8125|2.5G|2500"
+    },
+    {
+      "id": "intelmausi",
+      "name": "IntelMausi",
+      "category": "Ethernet",
+      "priority": "essential",
+      "description": "Driver for Intel Ethernet (I210, I211, I217, I218, I219). Common on Intel boards and ThinkPads.",
+      "github": "https://github.com/acidanthera/IntelMausi",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_ethernet_vendor": "Intel"
+    },
+    {
+      "id": "atheros",
+      "name": "AtherosE2200Ethernet",
+      "category": "Ethernet",
+      "priority": "essential",
+      "description": "Driver for Atheros/Qualcomm/Killer AR816x, AR817x, Killer E220x, E2400, E2500.",
+      "github": "https://github.com/Mieze/AtherosE2200Ethernet",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_ethernet_regex": "Atheros|Killer|Qualcomm"
+    },
+    {
+      "id": "usbtoolbox",
+      "name": "USBToolBox + USBMap",
+      "category": "USB",
+      "priority": "essential",
+      "description": "Build a permanent USBMap.kext for your system. Replaces USBInjectAll after mapping.",
+      "github": "https://github.com/USBToolBox/kext",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "always_required": true
+    },
+    {
+      "id": "usbinjectall",
+      "name": "USBInjectAll",
+      "category": "USB",
+      "priority": "recommended",
+      "description": "Injects all USB ports during initial setup only. Replace with USBMap.kext after mapping.",
+      "github": "https://github.com/Sniki/OS-X-USB-Inject-All",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "notes": "Temporary — setup only. 15-port limit on macOS 11+."
+    },
+    {
+      "id": "voodooPS2",
+      "name": "VoodooPS2Controller",
+      "category": "Input",
+      "priority": "essential",
+      "description": "PS/2 keyboard and trackpad driver. Essential for most laptops.",
+      "github": "https://github.com/acidanthera/VoodooPS2",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_is_laptop": true
+    },
+    {
+      "id": "voodooi2c",
+      "name": "VoodooI2C + VoodooI2CHID",
+      "category": "Input",
+      "priority": "recommended",
+      "description": "Driver for I2C HID trackpads (most modern laptop trackpads). Include both VoodooI2C and VoodooI2CHID.",
+      "github": "https://github.com/VoodooI2C/VoodooI2C",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_is_laptop": true
+    },
+    {
+      "id": "voodoosmbus",
+      "name": "VoodooSMBus",
+      "category": "Input",
+      "priority": "optional",
+      "description": "For ELAN SMBus trackpads found in ThinkPads and some Lenovo laptops.",
+      "github": "https://github.com/VoodooSMBus/VoodooSMBus",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_is_laptop": true,
+      "match_brand_regex": "Lenovo|ThinkPad"
+    },
+    {
+      "id": "ecenabler",
+      "name": "ECEnabler",
+      "category": "Battery",
+      "priority": "essential",
+      "description": "Fixes battery percentage reading on most laptops by allowing large EC register reads.",
+      "github": "https://github.com/1Revenger1/ECEnabler",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_is_laptop": true
+    },
+    {
+      "id": "smcbattery",
+      "name": "SMCBatteryManager",
+      "category": "Battery",
+      "priority": "essential",
+      "description": "VirtualSMC plugin. Reads battery status and exposes it to macOS.",
+      "github": "https://github.com/acidanthera/VirtualSMC",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["virtualsmc"],
+      "match_is_laptop": true
+    },
+    {
+      "id": "brightnesskeys",
+      "name": "BrightnessKeys",
+      "category": "Input",
+      "priority": "recommended",
+      "description": "Adds macOS brightness key support for laptop keyboards.",
+      "github": "https://github.com/acidanthera/BrightnessKeys",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_is_laptop": true
+    },
+    {
+      "id": "smcprocessor",
+      "name": "SMCProcessor",
+      "category": "Sensors",
+      "priority": "recommended",
+      "description": "CPU temperature and frequency sensors. Intel only.",
+      "github": "https://github.com/acidanthera/VirtualSMC",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["virtualsmc"],
+      "match_cpu_vendor": "Intel"
+    },
+    {
+      "id": "smcsuperio",
+      "name": "SMCSuperIO",
+      "category": "Sensors",
+      "priority": "optional",
+      "description": "Fan speed and voltage sensors for desktop motherboards.",
+      "github": "https://github.com/acidanthera/VirtualSMC",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["virtualsmc"],
+      "match_is_desktop": true
+    },
+    {
+      "id": "amdryzen_power",
+      "name": "AMDRyzenCPUPowerManagement",
+      "category": "Sensors",
+      "priority": "recommended",
+      "description": "Power management and temperature readings for AMD Ryzen CPUs.",
+      "github": "https://github.com/trulyspinach/SMCAMDProcessor",
+      "supported_macos": ["catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "match_cpu_vendor": "AMD"
+    },
+    {
+      "id": "nvmefix",
+      "name": "NVMeFix",
+      "category": "Storage",
+      "priority": "essential",
+      "description": "Fixes power management for non-Apple NVMe SSDs. Prevents data loss and improves stability.",
+      "github": "https://github.com/acidanthera/NVMeFix",
+      "supported_macos": ["catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "match_has_nvme": true
+    },
+    {
+      "id": "restrictevents",
+      "name": "RestrictEvents",
+      "category": "Fixes",
+      "priority": "recommended",
+      "description": "Blocks unwanted system processes and enables CPU name patching in About This Mac.",
+      "github": "https://github.com/acidanthera/RestrictEvents",
+      "supported_macos": ["bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"],
+      "always_required": true
+    },
+    {
+      "id": "featureunlock",
+      "name": "FeatureUnlock",
+      "category": "Fixes",
+      "priority": "optional",
+      "description": "Enables AirPlay to Mac, Universal Control, Sidecar, and Night Shift on unsupported SMBIOS.",
+      "github": "https://github.com/acidanthera/FeatureUnlock",
+      "supported_macos": ["monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"]
+    },
+    {
+      "id": "hibernationfixup",
+      "name": "HibernationFixup",
+      "category": "Fixes",
+      "priority": "optional",
+      "description": "Fixes hibernation and sleep/wake issues common on Hackintoshes.",
+      "github": "https://github.com/acidanthera/HibernationFixup",
+      "supported_macos": ["highsierra","mojave","catalina","bigsur","monterey","ventura","sonoma","sequoia","tahoe"],
+      "depends_on": ["lilu"]
+    }
+  ]
+}
