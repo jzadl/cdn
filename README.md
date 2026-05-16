@@ -1,6 +1,5 @@
 # cdn
 
-Why are you even here?
-___
+CDN to store some JSON, HTML and other stuff
 
-# https://jzadl.xyz
+made by jzadl
