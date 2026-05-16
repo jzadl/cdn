@@ -1,2 +1,6 @@
 # cdn
-Jesus CDN to store some static files!
+
+Why are you even here?
+___
+
+# https://jzadl.xyz
