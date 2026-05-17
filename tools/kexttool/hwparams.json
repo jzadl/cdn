@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Hardware detection parameters for kext.checker",
+    "updated": "2026-05-16"
+  },
+
+  "gpu_rules": [
+    {
+      "comment": "── Intel ──────────────────────────────────────────────",
+      "regex": "Iris\\s*Xe|UHD\\s*7[0-9]{2}",
+      "vendor": "Intel",
+      "id": "intel_iris_xe"
+    },
+    {
+      "regex": "UHD\\s*6[0-9]{2}",
+      "vendor": "Intel",
+      "id": "intel_uhd_630"
+    },
+    {
+      "regex": "HD\\s*6[0-9]{2}",
+      "vendor": "Intel",
+      "id": "intel_hd_630"
+    },
+    {
+      "regex": "HD\\s*5[0-9]{2}",
+      "vendor": "Intel",
+      "id": "intel_hd_530"
+    },
+    {
+      "regex": "HD\\s*4[0-9]{3}|Iris\\s*5[0-9]{3}",
+      "vendor": "Intel",
+      "id": "intel_hd_4000"
+    },
+    {
+      "regex": "HD\\s*[23][0-9]{3}",
+      "vendor": "Intel",
+      "id": "intel_hd_3000"
+    },
+
+    {
+      "comment": "── NVIDIA ─────────────────────────────────────────────",
+      "regex": "RTX\\s*3[0-9]{3}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_ampere",
+      "macos_support": false
+    },
+    {
+      "regex": "RTX\\s*[24][0-9]{3}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_ada_hopper",
+      "macos_support": false
+    },
+    {
+      "regex": "RTX\\s*[12][0-9]{3}|GTX\\s*16[0-9]{2}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_turing",
+      "macos_support": false
+    },
+    {
+      "regex": "GTX\\s*10[0-9]{2}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_pascal",
+      "macos_support": true,
+      "macos_note": "Web Drivers — High Sierra & Mojave only"
+    },
+    {
+      "regex": "GTX\\s*9[0-9]{2}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_maxwell",
+      "macos_support": true,
+      "macos_note": "Web Drivers — High Sierra & Mojave only"
+    },
+    {
+      "regex": "GTX\\s*[67][0-9]{2}",
+      "vendor": "NVIDIA",
+      "id": "nvidia_kepler",
+      "macos_support": true,
+      "macos_note": "Native up to Monterey via OCLP on newer macOS"
+    },
+
+    {
+      "comment": "── AMD ────────────────────────────────────────────────",
+      "regex": "RX\\s*7[0-9]{3}",
+      "vendor": "AMD",
+      "id": "amd_rdna3",
+      "macos_support": true
+    },
+    {
+      "regex": "RX\\s*6[0-9]{3}",
+      "vendor": "AMD",
+      "id": "amd_rdna2",
+      "macos_support": true
+    },
+    {
+      "regex": "RX\\s*5[0-9]{3}",
+      "vendor": "AMD",
+      "id": "amd_rdna1",
+      "macos_support": true
+    },
+    {
+      "regex": "RX\\s*[45][0-9]{2}",
+      "vendor": "AMD",
+      "id": "amd_polaris",
+      "macos_support": true
+    },
+    {
+      "regex": "Vega",
+      "vendor": "AMD",
+      "id": "amd_vega",
+      "macos_support": true
+    },
+    {
+      "regex": "Radeon\\s+\\d{3}[Mm]|Radeon\\s+RX\\s+Vega\\s+[0-9]+[Mm]",
+      "vendor": "AMD",
+      "id": "amd_igpu",
+      "macos_support": true
+    }
+  ],
+
+  "intel_gen_igpu": {
+    "comment": "Fallback iGPU id when no Card name is found, keyed by gen number",
+    "1":  "intel_hd_3000",
+    "2":  "intel_hd_3000",
+    "3":  "intel_hd_4000",
+    "4":  "intel_hd_4000",
+    "5":  "intel_hd_530",
+    "6":  "intel_hd_530",
+    "7":  "intel_hd_630",
+    "8":  "intel_uhd_630",
+    "9":  "intel_uhd_630",
+    "10": "intel_uhd_630",
+    "11": "intel_iris_xe",
+    "12": "intel_iris_xe",
+    "13": "intel_iris_xe",
+    "14": "intel_iris_xe"
+  },
+
+  "intel_gen_detection": [
+    { "gen": 14, "regex": "1[4][0-9]{3}" },
+    { "gen": 13, "regex": "1[3][0-9]{3}" },
+    { "gen": 12, "regex": "1[2][0-9]{3}" },
+    { "gen": 11, "regex": "1[1][0-9]{3}|1[12][0-9]{2}G" },
+    { "gen": 10, "regex": "10[0-9]{3}|10[0-9]{2}G" },
+    { "gen": 9,  "regex": "9[0-9]{3}" },
+    { "gen": 8,  "regex": "8[0-9]{3}" },
+    { "gen": 7,  "regex": "7[0-9]{3}" },
+    { "gen": 6,  "regex": "6[0-9]{3}" },
+    { "gen": 5,  "regex": "5[0-9]{3}" },
+    { "gen": 4,  "regex": "4[0-9]{3}" },
+    { "gen": 3,  "regex": "3[0-9]{3}" },
+    { "gen": 2,  "regex": "2[0-9]{3}" }
+  ],
+
+  "wifi_vendors": [
+    {
+      "vendor": "Intel",
+      "regex": "intel",
+      "line_match": "wi-fi|wireless|802\\.11|AX[0-9]{3}|AC [0-9]{4}|Wi-Fi 6"
+    },
+    {
+      "vendor": "Broadcom",
+      "regex": "broadcom|bcm",
+      "line_match": "wi-fi|wireless|802\\.11"
+    },
+    {
+      "vendor": "Qualcomm",
+      "regex": "qualcomm|atheros|killer",
+      "line_match": "wi-fi|wireless|802\\.11"
+    },
+    {
+      "vendor": "Realtek",
+      "regex": "realtek",
+      "line_match": "wi-fi|wireless|802\\.11"
+    }
+  ],
+
+  "ethernet_vendors": [
+    {
+      "vendor": "Intel",
+      "regex": "intel",
+      "line_match": "ethernet|lan\\b|gbe|network connection|I[0-9]{3}-V|I[0-9]{3}[A-Z]{2}"
+    },
+    {
+      "vendor": "Realtek",
+      "regex": "realtek",
+      "line_match": "ethernet|lan\\b|gbe|network connection|PCIe GBE|RTL8"
+    },
+    {
+      "vendor": "Atheros",
+      "regex": "atheros|killer|qualcomm",
+      "line_match": "ethernet|lan\\b|gbe|network connection"
+    },
+    {
+      "vendor": "Broadcom",
+      "regex": "broadcom",
+      "line_match": "ethernet|lan\\b|gbe|network connection|NetXtreme"
+    },
+    {
+      "vendor": "Marvell",
+      "regex": "marvell|yukon",
+      "line_match": "ethernet|lan\\b|gbe|network connection"
+    }
+  ],
+
+  "nvme_detection": {
+    "comment": "If any of these regexes match a Disk line, hw.hasNVMe = true",
+    "regexes": [
+      "nvme|nvm express",
+      "970\\s*(evo|pro)",
+      "980\\s*(evo|pro)",
+      "990\\s*pro",
+      "SN[57][0-9]{2}",
+      "SN850",
+      "FireCuda\\s*5",
+      "P[35][0-9]{3}[Ee]?",
+      "XPG\\s*S[0-9]{4}",
+      "Sabrent\\s*Rocket",
+      "Blue\\s*SN",
+      "KC[0-9]{4}",
+      "MP[0-9]{3}",
+      "MZVL|MZVPW|MZVKW"
+    ]
+  },
+
+  "laptop_keywords": [
+    "laptop", "notebook", "thinkpad", "ideapad", "inspiron",
+    "latitude", "elitebook", "probook", "pavilion", "envy",
+    "spectre", "xps", "yoga", "zenbook", "vivobook", "matebook",
+    "aspire", "swift", "nitro", "predator", "helios", "triton",
+    "rog", "tuf", "zephyrus", "strix", "flow", "legion",
+    "slim", "blade", "stealth", "raider", "katana", "prestige",
+    "gs[0-9]{2}", "gp[0-9]{2}", "ge[0-9]{2}", "gl[0-9]{2}"
+  ],
+
+  "audio_keywords": [
+    "realtek", "conexant", "idt", "cirrus", "via hd", "sigmatel",
+    "audio", "sound", "ALC[0-9]{3}", "CS[0-9]{4}"
+  ],
+
+  "warnings": {
+    "nvidia_no_support_ids": ["nvidia_turing", "nvidia_ampere", "nvidia_ada_hopper"],
+    "nvidia_webdriver_ids":  ["nvidia_maxwell", "nvidia_pascal"],
+    "intel_iris_xe_no_igpu": true,
+    "amd_cpu_compat_note":   true,
+    "no_wifi_suggestion":    "No Wi-Fi card detected. Consider an Intel AX200/AX210 or Broadcom BCM94360."
+  },
+
+  "warning_messages": {
+    "nvidia_turing":      "NVIDIA Turing (RTX 20xx / GTX 16xx) GPUs have zero macOS support. No drivers exist.",
+    "nvidia_ampere":      "NVIDIA Ampere (RTX 30xx) GPUs have zero macOS support. No drivers exist.",
+    "nvidia_ada_hopper":  "NVIDIA Ada/Hopper (RTX 40xx/50xx) GPUs have zero macOS support. No drivers exist.",
+    "nvidia_webdriver":   "GTX 900/1000 series only works on High Sierra & Mojave via NVIDIA Web Drivers. Dead on Catalina+.",
+    "intel_iris_xe":      "Intel Iris Xe / UHD 750 (11th gen+) has NO iGPU acceleration on any macOS. Must use a supported AMD dGPU.",
+    "amd_cpu":            "AMD CPUs require AMD-OSX kernel patches in config.plist. Follow the Dortania AMD guide."
+  }
+}
