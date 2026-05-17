@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "updated": "2026-05-16",
     "author": "jzadl",
-    "description": "Hackintosh kext + macOS compatibility database for tools.jzadl.xyz/kext-checker. Tested on T480 (Tahoe), T440s. Kexts only — no Quirks, no ACPI, no config.plist.",
+    "description": "Hackintosh kext + macOS compatibility database for tools.jzadl.xyz/kext-checker. Tested on T480 (Kaby Lake, Tahoe), T440s. Kexts only, no Quirks, no ACPI, no config.plist.",
     "cdn": "cdn.jzadl.xyz/tools/kexttool/kextdb.json",
     "sources": [
       "https://dortania.github.io/OpenCore-Install-Guide/",
