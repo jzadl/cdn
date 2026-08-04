@@ -1,0 +1,28 @@
+about: Full Android OS builds for selene.
+
+name: LineageOS 22.1
+version: 22.1-20260728
+status: stable
+maintainer: jzadl
+size: 1.4G
+date: 2026-07-28
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/rom/lineage-22.1-selene.zip
+note: GApps and vanilla builds available
+
+name: crDroid
+version: 11.7
+status: stable
+maintainer: crdroid-team
+size: 1.6G
+date: 2026-06-14
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/rom/crdroid-11.7-selene.zip
+note: A15 base, weekly builds
+
+name: PixelExperience
+version: 14.0
+status: beta
+maintainer: jzadl
+size: 1.8G
+date: 2026-05-02
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/rom/px-14-selene.zip
+note: camera HAL still unstable

@@ -1,0 +1,18 @@
+about: OS ports not originally built for this device.
+
+name: PostmarketOS
+version: edge
+status: beta
+maintainer: community
+size: 640M
+date: 2026-07-01
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/ports/pmos-edge-selene.img.xz
+note: mainline kernel, wifi wip
+
+name: Ubuntu Touch
+version: 20.04-focal
+status: beta
+maintainer: jzadl
+size: 980M
+date: 2026-04-19
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/ports/ubports-focal-selene.zip

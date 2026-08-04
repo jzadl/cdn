@@ -1,0 +1,27 @@
+about: Stock and modified boot, vendor, and firmware images.
+
+name: Stock boot.img
+version: A15-QPR2
+status: stable
+maintainer: oem
+size: 96M
+date: 2026-07-15
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/firmware/boot-a15qpr2-selene.img
+note: for OTA rollback
+
+name: Vendor image
+version: A15-QPR2
+status: stable
+maintainer: oem
+size: 1.1G
+date: 2026-07-15
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/firmware/vendor-a15qpr2-selene.img
+
+name: Modem firmware pack
+version: 2026.06
+status: stable
+maintainer: jzadl
+size: 180M
+date: 2026-06-30
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/firmware/modem-2026.06-selene.zip
+note: fixes VoLTE on some carriers

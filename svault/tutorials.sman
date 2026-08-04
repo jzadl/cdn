@@ -1,0 +1,26 @@
+about: Guides for flashing, unlocking, and recovering selene.
+
+name: Unlocking the bootloader
+version: guide
+status: stable
+maintainer: jzadl
+size: 4K
+date: 2026-02-10
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/tutorials/unlock-bootloader.md
+
+name: Flashing a custom ROM safely
+version: guide
+status: stable
+maintainer: jzadl
+size: 6K
+date: 2026-02-11
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/tutorials/flash-rom-guide.md
+
+name: Recovering from a bootloop
+version: guide
+status: stable
+maintainer: community
+size: 5K
+date: 2026-03-05
+url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/tutorials/bootloop-recovery.md
+note: covers EDL mode
