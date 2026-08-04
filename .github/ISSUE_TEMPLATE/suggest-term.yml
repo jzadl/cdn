@@ -1,0 +1,62 @@
+name: "🧸 Suggest an ELI5 term"
+description: "Suggest a new term for Explain It Like I'm Five"
+title: "[Term] "
+labels: ["eli5-term"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow the list! Fill this out and it'll show up as an issue we can review and add to `terms.json`.
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Category
+      description: Which section does this term belong in?
+      options:
+        - Android
+        - iOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+
+  - type: input
+    id: term
+    attributes:
+      label: Term
+      description: The word or acronym itself, exactly how it should be displayed.
+      placeholder: "e.g. Sandbox"
+    validations:
+      required: true
+
+  - type: textarea
+    id: explanation
+    attributes:
+      label: ELI5 explanation
+      description: >
+        Explain it like you're talking to a five-year-old. Use a real analogy,
+        not a dictionary definition. Aim for 3-5 sentences, same style as the
+        existing terms on the site.
+      placeholder: "Picture every app on your phone playing in its own private sandbox..."
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source (optional)
+      description: Link to docs or anywhere that backs up the term, if you have one.
+      placeholder: "https://..."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked this term isn't already on the site
+          required: true
+        - label: My explanation uses an analogy, not just a technical definition
+          required: true
