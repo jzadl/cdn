@@ -6,7 +6,7 @@ status: stable
 maintainer: twrp-team
 size: 210M
 date: 2026-06-02
-url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/recovery/twrp-3.7.1-selene.img
+url: https://telegra.ph/This-is-an-example-08-04
 
 name: OrangeFox
 version: R12.1
@@ -14,5 +14,5 @@ status: stable
 maintainer: orangefox-team
 size: 240M
 date: 2026-05-28
-url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/recovery/orangefox-r12.1-selene.img
+url: https://telegra.ph/This-is-an-example-08-04
 note: touch-friendly UI
