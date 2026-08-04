@@ -6,7 +6,7 @@ status: stable
 maintainer: jzadl
 size: 42M
 date: 2026-07-20
-url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/kernel/kirisakura-5.2.1-selene.zip
+url: https://telegra.ph/This-is-an-example-08-04
 note: KernelSU and SUSFS included
 
 name: blu_spark
@@ -15,4 +15,4 @@ status: stable
 maintainer: blu_spark
 size: 38M
 date: 2026-03-11
-url: https://cdn.jsdelivr.net/gh/jzadl/cdn/svault/kernel/bluspark-r18-selene.zip
+url: https://telegra.ph/This-is-an-example-08-04
